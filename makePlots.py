@@ -192,9 +192,9 @@ def correctEfficiency(t, tt, prompt):
         return (t[0], t[1], t[2], t[3], t[4], t[5], eff_corr_a, eff_corr_err_m_a, eff_corr_err_p_a)
 
 if __name__ == '__main__':
-    xTitle = "muon #eta"
-    yTitle = "> 7 layers efficiency"
-    outputFile = "TkLay7_from_TMA_eta.png"
+    xTitle = "N(primary vertices)"
+    yTitle = "Efficiency"
+    outputFile = "eff_vtx_dr030e030_corr.png"
     gSystem.Load("/Users/rovere/tdrStyle.C")
     setTDRStyle()
     text_card = sys.argv[1] if len(sys.argv) > 1 else None
@@ -211,13 +211,13 @@ if __name__ == '__main__':
         t = correctEfficiency(t, tt, prompt=false)
         t = correctEfficiency(t, tt, prompt=true)
     r = makeFrame("eff_eta", -2.4, 0.78, 2.4, 1.01)
-    legend = TLegend(0.6, 0.25, 0.9, 0.45, "p_{T} > 20 GeV")
+    legend = TLegend(0.6, 0.25, 0.93, 0.45, "")
     legend.SetFillColor(0)
     gg = doPlotSolid("", xTitle, yTitle, t[1], t[6], t[0], t[2], t[7], t[8])
     g = doPlot("", xTitle, yTitle, t[1], t[3], t[0], t[2], t[4], t[5])
     legend = setTextProperties(legend)
-    legend.AddEntry(g, "Mu ReReco", "lp")
-    legend.AddEntry(gg, "Prompt", "f")
+    legend.AddEntry(g, "New Iterations", "lp")
+    legend.AddEntry(gg, "Default", "f")
     legend.Draw()
     text = TLatex(-0.5, 0.955, "Run2012C-v1, L = 0.49 fb^{-1}")
 #     text.SetTextFont(43)
