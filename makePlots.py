@@ -54,8 +54,8 @@ def doPlotSolid(title, xtitle, ytitle, x, y, exl, exh, eyl, eyh):
     gr.GetXaxis().SetLimits(x[0]-exl[0], x[-1]+exh[-1])
     gr.GetYaxis().SetTitle(ytitle)
     gr.GetYaxis().SetTitleOffset(1.5)
-    gr.SetMinimum(0.79)
-    gr.SetMaximum(1.04)
+    gr.SetMinimum(0.9)
+    gr.SetMaximum(1.01)
 #    gr.GetYaxis().SetTitleOffset(1.4)
     gr.SetMarkerStyle(marker_style)
     gr.SetMarkerColor(color)
@@ -192,9 +192,9 @@ def correctEfficiency(t, tt, prompt):
         return (t[0], t[1], t[2], t[3], t[4], t[5], eff_corr_a, eff_corr_err_m_a, eff_corr_err_p_a)
 
 if __name__ == '__main__':
-    xTitle = "N(primary vertices)"
+    xTitle = "muon #eta"
     yTitle = "Efficiency"
-    outputFile = "eff_vtx_dr030e030_corr.png"
+    outputFile = "eff_eta_dr030e030_corr.png"
     gSystem.Load("/Users/rovere/tdrStyle.C")
     setTDRStyle()
     text_card = sys.argv[1] if len(sys.argv) > 1 else None
