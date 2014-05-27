@@ -54,9 +54,10 @@ def doPlotSolid(title, xtitle, ytitle, x, y, exl, exh, eyl, eyh):
     gr.GetXaxis().SetLimits(x[0]-exl[0], x[-1]+exh[-1])
     gr.GetYaxis().SetTitle(ytitle)
     gr.GetYaxis().SetTitleOffset(1.5)
-    gr.SetMinimum(0.9)
+    gr.SetMinimum(0.79)
     gr.SetMaximum(1.01)
-#    gr.GetYaxis().SetTitleOffset(1.4)
+#     gr.SetMinimum(0.9)
+#     gr.SetMaximum(1.01)
     gr.SetMarkerStyle(marker_style)
     gr.SetMarkerColor(color)
     gr.SetMarkerSize(2)
@@ -193,8 +194,8 @@ def correctEfficiency(t, tt, prompt):
 
 if __name__ == '__main__':
     xTitle = "muon #eta"
-    yTitle = "Efficiency"
-    outputFile = "eff_eta_dr030e030_corr.png"
+    yTitle = "> 7 layers efficiency"
+    outputFile = "TkLay7_from_TMA_eta.png"
     gSystem.Load("/Users/rovere/tdrStyle.C")
     setTDRStyle()
     text_card = sys.argv[1] if len(sys.argv) > 1 else None
@@ -211,13 +212,13 @@ if __name__ == '__main__':
         t = correctEfficiency(t, tt, prompt=false)
         t = correctEfficiency(t, tt, prompt=true)
     r = makeFrame("eff_eta", -2.4, 0.78, 2.4, 1.01)
-    legend = TLegend(0.6, 0.25, 0.93, 0.45, "")
+    legend = TLegend(0.6, 0.25, 0.93, 0.45, "pt > 20 GeV")
     legend.SetFillColor(0)
     gg = doPlotSolid("", xTitle, yTitle, t[1], t[6], t[0], t[2], t[7], t[8])
     g = doPlot("", xTitle, yTitle, t[1], t[3], t[0], t[2], t[4], t[5])
     legend = setTextProperties(legend)
-    legend.AddEntry(g, "New Iterations", "lp")
-    legend.AddEntry(gg, "Default", "f")
+    legend.AddEntry(gg, "2012 Tracking", "f")
+    legend.AddEntry(g, "+2 Iterations", "lp")
     legend.Draw()
     text = TLatex(-0.5, 0.955, "Run2012C-v1, L = 0.49 fb^{-1}")
 #     text.SetTextFont(43)
